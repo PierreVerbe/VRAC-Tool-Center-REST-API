@@ -1,3 +1,22 @@
+# VRAC Tool Center
+
+## About this repository
+
+## Prerequisite
+
+## Technical Stack
+
+## Installation
+
+## Notes
+* Todo list [file](resources/docs/todo.md) <br>
+* If you have issues look at this [file](resources/docs/issue.md) <br>
+
+
+
+
+
+
 docker-compose up (start all 3 containers)
 docker ps (see them running)
 
@@ -46,7 +65,3 @@ docker login --username=pierreverbe
 password
 
 docker push pierreverbe/vrac-tool-center-rest-service:0.1.1-SNAPSHOT
-
-
-
-
