@@ -2,7 +2,7 @@
 .idea/
 *.iml
 
-### Maven ###
+### API ###
 target/
 
 ### Macintosh ###
