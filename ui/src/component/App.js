@@ -1,6 +1,6 @@
 import { BrowserRouter as Router, Link, Route, Switch } from "react-router-dom"
 
-import ListStudent from "./student/ListStudent"
+import UIStudent from "./student/UIStudent"
 import './App.css';
 
 const App = () => (
@@ -18,7 +18,7 @@ const App = () => (
       <div>
         <Switch>
           <Route path="/">
-            <ListStudent />
+            <UIStudent />
           </Route>
         </Switch>
       </div>

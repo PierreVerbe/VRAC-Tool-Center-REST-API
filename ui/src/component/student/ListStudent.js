@@ -3,24 +3,25 @@ import PropTypes from "prop-types"
 
 import Student from "./Student"
 
-const ListStudent = (student) => {
+const ListStudent = ({students}) => {
 
     const renderStudent = () => {
-        return student.map((student, i) => (
-            <li key={i} className="ListSelectLi" title="ListSelect-Li">
+        return students.map((student, i) => (
+            <li key={i}>
                 <Student student={student} />
             </li>
-        ))
+        )
+        )
     }
 
     return (
-        student.length === 0 ? <div><span>Empty</span></div> : <ul>{renderStudent()}</ul>
+        students.length === 0 ? <div><span>Empty</span></div> : <ul>{renderStudent()}</ul>
     )
 
 }
 
 ListStudent.propTypes = {
-    mercs: PropTypes.array.isRequired
+    students: PropTypes.array.isRequired
 }
 
 export default ListStudent
