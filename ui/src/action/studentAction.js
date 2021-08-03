@@ -1,4 +1,4 @@
-import { getAllStudents, insertStudent } from "./../request/apiStudent"
+import { getAllStudents, insertStudent } from "./../request/ApiStudent"
 
 export const GET_ALL_STUDENTS = "GET_ALL_STUDENTS"
 export const INSERT_STUDENT = "INSERT_STUDENT"

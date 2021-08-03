@@ -15,7 +15,8 @@ export const getAllStudents = async () => {
 export const insertStudent = async (student) => {
     try {
         await Axios.post(baseURL + `/create`,
-        {
+        {   
+           id: student.id,
            name: student.name,
            age: student.age,
            grade: student.grade 
