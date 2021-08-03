@@ -51,6 +51,7 @@ password
 ```bash
 docker push pierreverbe/vrac-tool-center-rest-service:x.x.x-SNAPSHOT
 ```
-* 4 Update docker-compose file to get new release
+* 4 Update maven pom file to update version tag
+* 5 Update docker-compose file to get new release
 
 ## UI
