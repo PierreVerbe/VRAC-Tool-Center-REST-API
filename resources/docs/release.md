@@ -34,6 +34,11 @@ docker-compose stop
 
 ## Create release
 ### REST service
+
+ cd API
+
+ mvn package
+
 * 1 Build an image from a Dockerfile
 ```bash
 docker build -t pierreverbe/vrac-tool-center-rest-service:x.x.x-SNAPSHOT .
@@ -54,4 +59,10 @@ docker push pierreverbe/vrac-tool-center-rest-service:x.x.x-SNAPSHOT
 * 4 Update maven pom file to update version tag
 * 5 Update docker-compose file to get new release
 
-## UI
+### UI
+
+cd ui
+
+docker build
+doocekr login
+docker push
