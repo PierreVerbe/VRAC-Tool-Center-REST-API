@@ -4,5 +4,7 @@
 * Docker <br>
 * Connexion React <br>
 * spring rest cors <br>
-* docker config inside app
-* spring multiple bdd
+* docker config inside app <br>
+* spring multiple bdd <br>
+* doc dockerhub <br>
+* doc github <br>
