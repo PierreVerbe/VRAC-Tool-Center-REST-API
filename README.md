@@ -43,7 +43,7 @@ docker-compose start
 ```
 
 ## Notes
-* Publish a new release [file]((resources/docs/release.md) <br>
+* Publish a new release [file](resources/docs/release.md) <br>
 * If you have issues look at this [file](resources/docs/issue.md) <br>
 * Todo list [file](resources/docs/todo.md) <br>
 * Docker Hub, [rest service](https://hub.docker.com/r/pierreverbe/vrac-tool-center-rest-service) <br>

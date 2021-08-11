@@ -8,3 +8,4 @@
 * [ ] spring multiple bdd <br>
 * [ ] doc dockerhub <br>
 * [ ] doc github <br>
+* [ ] MongoDB in cloud <br>
