@@ -9,3 +9,5 @@
 * [ ] doc dockerhub <br>
 * [ ] doc github <br>
 * [ ] MongoDB in cloud <br>
+* [ ] github package <br>
+* [ ] github release <br>
