@@ -1,16 +1,14 @@
-# https://www.youtube.com/watch?v=0B2raYYH2fE
-
 version: "3.8"
 services:
-  #react-app:
-    #image: react-app
-    #stdin_open: true
-    #ports: 
-    #  - "3000:3000"
-    #networks:
-    #  - vrac-tool-center
+  react-app:
+    image: pierreverbe/vrac-tool-center-ui:0.1.0-SNAPSHOT
+    stdin_open: true
+    ports: 
+      - "3000:3000"
+    networks:
+      - vrac-tool-center
   api-server:
-    image: pierreverbe/vrac-tool-center-rest-service:0.1.3-SNAPSHOT
+    image: pierreverbe/vrac-tool-center-rest-service:0.1.4-SNAPSHOT
     ports:
       - "5000:5000"
     networks:
