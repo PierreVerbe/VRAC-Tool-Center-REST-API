@@ -33,14 +33,12 @@ docker-compose stop
 ```
 
 ## Create release
+
 ### REST service
-
- cd API
-
- mvn package
-
 * 1 Build an image from a Dockerfile
 ```bash
+cd API
+mvn package
 docker build -t pierreverbe/vrac-tool-center-rest-service:x.x.x-SNAPSHOT .
 ```
 * 1 bis (Optional) Run docker image built
@@ -60,9 +58,19 @@ docker push pierreverbe/vrac-tool-center-rest-service:x.x.x-SNAPSHOT
 * 5 Update docker-compose file to get new release
 
 ### UI
-
+* 1 Build an image from a Dockerfile
+```bash
 cd ui
-
-docker build
-doocekr login
-docker push
+docker build -t pierreverbe/vrac-tool-center-ui:x.x.x-SNAPSHOT .
+```
+* 2 Add Docker Hub credentials
+```bash
+docker login --username=pierreverbe
+password
+```
+* 3 Push an image to Docker Hub
+```bash
+docker push pierreverbe/vrac-tool-center-ui:x.x.x-SNAPSHOT
+```
+* 4 Update package file to update version tag
+* 5 Update docker-compose file to get new release
