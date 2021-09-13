@@ -21,13 +21,9 @@ public class StrategyController {
     @Autowired
     private SequenceGeneratorService service;
 
-    @GetMapping(value = "/find/allStrategies")
-    public List<Strategy> getAllStrategies() {
-        return strategyRepository.findAll();
-    }
-
+    // CREATE
     @PostMapping(value = "/insert/strategy")
-    public String createStrategy(@RequestBody Strategy strategy) {
+    public String insertStrategy(@RequestBody Strategy strategy) {
         // Generate LocalDateTime
         LocalDateTime currentTime = LocalDateTime.now();
         strategy.setDate(currentTime);
@@ -39,6 +35,39 @@ public class StrategyController {
         return String.format("Strategy id=%d created", insertedStrategy.getId());
     }
 
+    // READ
+    @GetMapping(value = "/find/allStrategies")
+    public List<Strategy> getAllStrategies() {
+        return strategyRepository.findAll();
+    }
+
+    // UPDATE
+    @PutMapping("/update/strategy")
+    public String updateStrategy(@RequestBody Strategy strategyToUpdate) {
+        Long id = strategyToUpdate.getId();
+        Optional<Strategy> optionalStrategy = strategyRepository.findById(id);
+
+        if (optionalStrategy.isPresent()) {
+            // Generate LocalDateTime
+            LocalDateTime currentTime = LocalDateTime.now();
+
+            Strategy strategy = optionalStrategy.get();
+            strategy.setName(strategy.getName());
+            strategy.setDate(currentTime);
+            strategy.setDescription(strategy.getDescription());
+            strategy.setSender(strategy.getSender());
+            strategy.setStrategy(strategy.getStrategy());
+            strategy.setVersion(strategy.getVersion());
+            strategyRepository.deleteById(id);
+            strategyRepository.insert(strategy);
+            return String.format("Strategy id=%d updated", id);
+        }
+        else {
+            return String.format("Strategy id=%d cannot be updated", id);
+        }
+    }
+
+    // DELETE
     @DeleteMapping("/delete/strategy")
     public String deleteStrategyById(@RequestBody Long id) {
         Optional<Strategy> strategy = strategyRepository.findById(id);
