@@ -52,12 +52,12 @@ public class StrategyController {
             LocalDateTime currentTime = LocalDateTime.now();
 
             Strategy strategy = optionalStrategy.get();
-            strategy.setName(strategy.getName());
+            strategy.setName(strategyToUpdate.getName());
             strategy.setDate(currentTime);
-            strategy.setDescription(strategy.getDescription());
-            strategy.setSender(strategy.getSender());
-            strategy.setStrategy(strategy.getStrategy());
-            strategy.setVersion(strategy.getVersion());
+            strategy.setDescription(strategyToUpdate.getDescription());
+            strategy.setSender(strategyToUpdate.getSender());
+            strategy.setStrategy(strategyToUpdate.getStrategy());
+            strategy.setVersion(strategyToUpdate.getVersion());
             strategyRepository.deleteById(id);
             strategyRepository.insert(strategy);
             return String.format("Strategy id=%d updated", id);
