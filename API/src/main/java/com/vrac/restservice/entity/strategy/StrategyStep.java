@@ -1,4 +1,4 @@
-package com.vrac.restservice.model.entity.strategy;
+package com.vrac.restservice.entity.strategy;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

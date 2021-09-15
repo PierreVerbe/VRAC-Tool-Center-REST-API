@@ -1,4 +1,4 @@
-package com.vrac.restservice.model.entity.strategy;
+package com.vrac.restservice.entity.strategy;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;

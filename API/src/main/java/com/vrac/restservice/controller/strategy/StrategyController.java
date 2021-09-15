@@ -1,6 +1,6 @@
 package com.vrac.restservice.controller.strategy;
 
-import com.vrac.restservice.model.entity.strategy.Strategy;
+import com.vrac.restservice.entity.strategy.Strategy;
 import com.vrac.restservice.repository.StrategyRepository;
 import com.vrac.restservice.service.SequenceGeneratorService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
-import static com.vrac.restservice.model.entity.strategy.Strategy.SEQUENCE_NAME;
+import static com.vrac.restservice.entity.strategy.Strategy.SEQUENCE_NAME;
 
 @RestController
 public class StrategyController {
@@ -19,7 +19,7 @@ public class StrategyController {
     public StrategyRepository strategyRepository;
 
     @Autowired
-    private SequenceGeneratorService service;
+    private SequenceGeneratorService sequenceGeneratorService;
 
     // CREATE
     @PostMapping(value = "/insert/strategy")
@@ -29,7 +29,7 @@ public class StrategyController {
         strategy.setDate(currentTime);
 
         // Generate Sequence
-        strategy.setId(service.getSequenceNumber(SEQUENCE_NAME));
+        strategy.setId(sequenceGeneratorService.getSequenceNumber(SEQUENCE_NAME));
 
         Strategy insertedStrategy = strategyRepository.insert(strategy);
         return String.format("Strategy id=%d created", insertedStrategy.getId());

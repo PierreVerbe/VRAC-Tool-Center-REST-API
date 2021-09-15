@@ -1,4 +1,4 @@
-package com.vrac.restservice.model.entity.mongoDB;
+package com.vrac.restservice.entity.mongoDB;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

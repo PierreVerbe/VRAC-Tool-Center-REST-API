@@ -1,6 +1,6 @@
 package com.vrac.restservice.service;
 
-import com.vrac.restservice.model.entity.mongoDB.Sequence;
+import com.vrac.restservice.entity.mongoDB.Sequence;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoOperations;
 import org.springframework.data.mongodb.core.query.Criteria;

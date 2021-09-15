@@ -1,4 +1,4 @@
-package com.vrac.restservice.model.entity;
+package com.vrac.restservice.entity;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
