@@ -14,7 +14,7 @@ public class VracController {
 
     @GetMapping("/welcome")
     public String welcome() {
-        return "Welcome to the VRAC tool center ";
+        return "Welcome to the VRAC tool center";
     }
 
     @GetMapping("/random/{min}/{max}")
