@@ -6,14 +6,16 @@ import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import static com.vrac.restservice.entity.MongoCollection.SEQUENCE;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Document(collection = "Sequence")
+@Document(collection = SEQUENCE)
 public class Sequence {
 
     @Id
     private String id;
-    private int seq;
+    private Long seq;
 
 }

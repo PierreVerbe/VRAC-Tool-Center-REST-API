@@ -31,6 +31,22 @@ public class VracControllerTest {
 
         // Then
         resultActions.andExpect(MockMvcResultMatchers.status().isOk());
+        resultActions.andExpect(MockMvcResultMatchers.content().string("Welcome to the VRAC tool center"));
+    }
+
+    @Test
+    public void generateRandomIntBetween0and0Test() throws Exception {
+        // Given
+        int min = 0;
+        int max = 0;
+        String path = String.format("/random/%d/%d", min, max);
+
+        // When
+        ResultActions resultActions = mockMvc.perform(MockMvcRequestBuilders.get(path));
+
+        // Then
+        resultActions.andExpect(MockMvcResultMatchers.status().isOk());
+        resultActions.andExpect(MockMvcResultMatchers.content().string("[0, 0] => 0"));
     }
 
 }

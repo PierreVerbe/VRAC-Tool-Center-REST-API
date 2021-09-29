@@ -11,10 +11,12 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import static com.vrac.restservice.entity.MongoCollection.STRATEGY;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Document(collection = "Strategy")
+@Document(collection = STRATEGY)
 public class Strategy {
 
     @Transient

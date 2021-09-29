@@ -2,7 +2,9 @@ package com.vrac.restservice.service;
 
 import com.vrac.restservice.entity.strategy.Strategy;
 import com.vrac.restservice.repository.StrategyRepository;
+import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.core.MongoOperations;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -11,6 +13,7 @@ import java.util.Optional;
 
 import static com.vrac.restservice.entity.strategy.Strategy.SEQUENCE_NAME;
 
+@Data
 @Service
 public class StrategyService {
 
@@ -19,6 +22,9 @@ public class StrategyService {
 
     @Autowired
     private SequenceGeneratorService sequenceGeneratorService;
+
+    @Autowired
+    private MongoOperations mongoOperations;
 
     public Strategy insertStrategy(Strategy strategy) {
         // Generate LocalDateTime
