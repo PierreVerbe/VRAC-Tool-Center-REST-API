@@ -1,6 +1,7 @@
 package com.vrac.restservice.service;
 
 import com.vrac.restservice.entity.mongoDB.Sequence;
+import com.vrac.restservice.repository.SequenceRepository;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoOperations;
@@ -16,6 +17,9 @@ import static org.springframework.data.mongodb.core.FindAndModifyOptions.options
 @Data
 @Service
 public class SequenceGeneratorService {
+
+    @Autowired
+    private SequenceRepository sequenceRepository;
 
     @Autowired
     private MongoOperations mongoOperations;
