@@ -20,3 +20,7 @@ use test
 ```bash
 show collections
 ```
+* To delete the collection named "myCollection"
+```bash
+db.myCollection.drop()
+```
