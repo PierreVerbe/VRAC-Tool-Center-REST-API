@@ -31,6 +31,11 @@ public class StrategyController {
         return strategyService.findAll();
     }
 
+    @GetMapping(value = "/find/strategy")
+    public Strategy getStrategy(@RequestBody Long id) {
+        return strategyService.findStrategyWithId(id);
+    }
+
     // UPDATE
     @PutMapping("/update/strategy")
     public String updateStrategy(@RequestBody Strategy strategyToUpdate) {

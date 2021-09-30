@@ -52,6 +52,28 @@ public class StrategyServiceTest {
     }
 
     @Test
+    public void findStrategyWithIdTest() {
+        // Given
+        Strategy strategy = new Strategy();
+        strategy.setName("myName");
+        strategy.setDescription("myDescription");
+        strategy.setSender("mySender");
+        strategy.setVersion("v1.0");
+
+        // When
+        strategyService.insertStrategy(strategy);
+        Strategy result = strategyService.findStrategyWithId(1L);
+
+        // Then
+        assertEquals(result.getId(), 1L);
+        assertEquals(result.getName(), "myName");
+        assertEquals(result.getDescription(), "myDescription");
+        assertEquals(result.getSender(), "mySender");
+        assertNull(result.getStrategy());
+        assertEquals(result.getVersion(), "v1.0");
+    }
+
+    @Test
     public void updateExitingStrategyTest() {
 
     }

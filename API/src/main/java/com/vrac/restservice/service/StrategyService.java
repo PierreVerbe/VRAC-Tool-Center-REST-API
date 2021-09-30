@@ -42,6 +42,11 @@ public class StrategyService {
         return strategyRepository.findAll();
     }
 
+    public Strategy findStrategyWithId(Long id) {
+        Optional<Strategy> strategy = strategyRepository.findById(id);
+        return strategy.orElse(null);
+    }
+
     public String updateStrategy(Strategy strategyToUpdate) {
         Long id = strategyToUpdate.getId();
         Optional<Strategy> optionalStrategy = strategyRepository.findById(id);
