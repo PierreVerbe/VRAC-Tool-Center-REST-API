@@ -1,6 +1,7 @@
 package com.vrac.restservice.service;
 
 import com.vrac.restservice.entity.strategy.Strategy;
+import com.vrac.restservice.error.exception.ResourceNotFoundException;
 import com.vrac.restservice.repository.StrategyRepository;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,43 +45,36 @@ public class StrategyService {
 
     public Strategy findStrategyWithId(Long id) {
         Optional<Strategy> strategy = strategyRepository.findById(id);
-        return strategy.orElse(null);
+        return strategy.orElseThrow(() -> new ResourceNotFoundException("Strategy not found with id:" + id));
     }
 
     public String updateStrategy(Strategy strategyToUpdate) {
         Long id = strategyToUpdate.getId();
-        Optional<Strategy> optionalStrategy = strategyRepository.findById(id);
+        Strategy strategy = strategyRepository
+                .findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Strategy not found with id:" + id));
 
-        if (optionalStrategy.isPresent()) {
-            // Generate LocalDateTime
-            LocalDateTime currentTime = LocalDateTime.now();
+        // Generate LocalDateTime
+        LocalDateTime currentTime = LocalDateTime.now();
 
-            Strategy strategy = optionalStrategy.get();
-            strategy.setName(strategyToUpdate.getName());
-            strategy.setDate(currentTime);
-            strategy.setDescription(strategyToUpdate.getDescription());
-            strategy.setSender(strategyToUpdate.getSender());
-            strategy.setStrategy(strategyToUpdate.getStrategy());
-            strategy.setVersion(strategyToUpdate.getVersion());
-            strategyRepository.deleteById(id);
-            strategyRepository.insert(strategy);
-            return String.format("Strategy id=%d updated", id);
-        }
-        else {
-            return String.format("Strategy id=%d cannot be updated", id);
-        }
+        strategy.setName(strategyToUpdate.getName());
+        strategy.setDate(currentTime);
+        strategy.setDescription(strategyToUpdate.getDescription());
+        strategy.setSender(strategyToUpdate.getSender());
+        strategy.setStrategy(strategyToUpdate.getStrategy());
+        strategy.setVersion(strategyToUpdate.getVersion());
+        strategyRepository.deleteById(id);
+        strategyRepository.insert(strategy);
+        return String.format("Strategy id=%d updated", id);
     }
 
     public String deleteStrategy(Long id) {
-        Optional<Strategy> strategy = strategyRepository.findById(id);
+        Strategy strategy = strategyRepository
+                .findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Strategy not found with id:" + id));
 
-        if (strategy.isPresent()) {
-            strategyRepository.deleteById(id);
-            return String.format("Strategy id=%d deleted", id);
-        }
-        else {
-            return String.format("Strategy id=%d does not exist", id);
-        }
+        strategyRepository.deleteById(id);
+        return String.format("Strategy id=%d deleted", id);
     }
 
 }
