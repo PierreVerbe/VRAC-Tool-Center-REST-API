@@ -28,7 +28,7 @@ public class StrategyController {
     // READ
     @GetMapping(value = "/find/allStrategies")
     public List<Strategy> getAllStrategies() {
-        return strategyService.findAll();
+        return strategyService.findAllStrategies();
     }
 
     @GetMapping(value = "/find/strategy")

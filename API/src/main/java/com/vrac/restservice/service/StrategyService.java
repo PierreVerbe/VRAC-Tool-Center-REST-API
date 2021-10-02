@@ -39,7 +39,7 @@ public class StrategyService {
         return insertedStrategy;
     }
 
-    public List<Strategy> findAll() {
+    public List<Strategy> findAllStrategies() {
         return strategyRepository.findAll();
     }
 
