@@ -83,7 +83,7 @@ public class StrategyServiceTest {
         Throwable exception = assertThrows(ResourceNotFoundException.class, () -> strategyService.findStrategyWithId(id));
 
         // Then
-        assertEquals("Strategy not found with id:1", exception.getMessage());
+        assertEquals("Strategy not found with id=1", exception.getMessage());
     }
 
     @Test
@@ -101,7 +101,7 @@ public class StrategyServiceTest {
         Throwable exception = assertThrows(ResourceNotFoundException.class, () -> strategyService.updateStrategy(strategy));
 
         // Then
-        assertEquals("Strategy not found with id:999", exception.getMessage());
+        assertEquals("Strategy not found with id=999", exception.getMessage());
     }
 
     @Test
@@ -118,7 +118,7 @@ public class StrategyServiceTest {
         Throwable exception = assertThrows(ResourceNotFoundException.class, () -> strategyService.deleteStrategy(id));
 
         // Then
-        assertEquals("Strategy not found with id:999", exception.getMessage());
+        assertEquals("Strategy not found with id=999", exception.getMessage());
     }
 
 }

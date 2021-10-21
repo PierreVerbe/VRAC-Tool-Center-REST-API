@@ -14,7 +14,6 @@ import java.util.Optional;
 
 import static com.vrac.restservice.entity.monitoring.Monitoring.SEQUENCE_NAME;
 
-
 @Data
 @Service
 public class MonitoringService {
@@ -46,14 +45,14 @@ public class MonitoringService {
 
     public Monitoring findMonitoringWithId(Long id) {
         Optional<Monitoring> monitoring = monitoringRepository.findById(id);
-        return monitoring.orElseThrow(() -> new ResourceNotFoundException("Monitoring not found with id:" + id));
+        return monitoring.orElseThrow(() -> new ResourceNotFoundException("Monitoring not found with id=" + id));
     }
 
     public String updateMonitoring(Monitoring monitoringToUpdate) {
         Long id = monitoringToUpdate.getId();
         Monitoring monitoring = monitoringRepository
                 .findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Monitoring not found with id:" + id));
+                .orElseThrow(() -> new ResourceNotFoundException("Monitoring not found with id=" + id));
 
         // Generate LocalDateTime
         LocalDateTime currentTime = LocalDateTime.now();
@@ -71,7 +70,7 @@ public class MonitoringService {
     public String deleteMonitoring(Long id) {
         Monitoring monitoring = monitoringRepository
                 .findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Monitoring not found with id:" + id));
+                .orElseThrow(() -> new ResourceNotFoundException("Monitoring not found with id=" + id));
 
         monitoringRepository.deleteById(id);
         return String.format("Monitoring id=%d deleted", id);

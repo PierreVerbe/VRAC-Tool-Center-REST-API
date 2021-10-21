@@ -45,14 +45,14 @@ public class StrategyService {
 
     public Strategy findStrategyWithId(Long id) {
         Optional<Strategy> strategy = strategyRepository.findById(id);
-        return strategy.orElseThrow(() -> new ResourceNotFoundException("Strategy not found with id:" + id));
+        return strategy.orElseThrow(() -> new ResourceNotFoundException("Strategy not found with id=" + id));
     }
 
     public String updateStrategy(Strategy strategyToUpdate) {
         Long id = strategyToUpdate.getId();
         Strategy strategy = strategyRepository
                 .findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Strategy not found with id:" + id));
+                .orElseThrow(() -> new ResourceNotFoundException("Strategy not found with id=" + id));
 
         // Generate LocalDateTime
         LocalDateTime currentTime = LocalDateTime.now();
@@ -71,7 +71,7 @@ public class StrategyService {
     public String deleteStrategy(Long id) {
         Strategy strategy = strategyRepository
                 .findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Strategy not found with id:" + id));
+                .orElseThrow(() -> new ResourceNotFoundException("Strategy not found with id=" + id));
 
         strategyRepository.deleteById(id);
         return String.format("Strategy id=%d deleted", id);
