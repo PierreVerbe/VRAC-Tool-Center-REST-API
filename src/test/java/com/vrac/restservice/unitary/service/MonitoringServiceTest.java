@@ -47,7 +47,7 @@ public class MonitoringServiceTest {
     }
 
     @Test
-    public void findAllMonitoringTest() {
+    public void findAllMonitoringsTest() {
         // Given
         for (int i = 1; i <= 3; i++) {
             Monitoring monitoring = new Monitoring();
@@ -58,7 +58,7 @@ public class MonitoringServiceTest {
         }
 
         // When
-        List<Monitoring> result = monitoringService.findAllMonitoring();
+        List<Monitoring> result = monitoringService.findAllMonitorings();
 
         // Then
         for (int i = 1; i <= 3; i++) {
@@ -72,11 +72,11 @@ public class MonitoringServiceTest {
     }
 
     @Test
-    public void findNoneExistingAllMonitoringTest() {
+    public void findNoneExistingAllMonitoringsTest() {
         // Given
 
         // When
-        List<Monitoring> result = monitoringService.findAllMonitoring();
+        List<Monitoring> result = monitoringService.findAllMonitorings();
 
         // Then
         assertTrue(result.isEmpty());

@@ -1,7 +1,7 @@
 package com.vrac.restservice.unitary.controller;
 
-import com.vrac.restservice.controller.strategy.StrategyController;
-import com.vrac.restservice.service.StrategyService;
+import com.vrac.restservice.controller.monitoring.MonitoringController;
+import com.vrac.restservice.service.MonitoringService;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,22 +10,35 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
-@WebMvcTest(controllers = StrategyController.class)
-public class StrategyControllerTest {
+@WebMvcTest(controllers = MonitoringController.class)
+public class MonitoringControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
 
     @MockBean
-    private StrategyService strategyService;
+    private MonitoringService monitoringService;
+
+    @Disabled("Failed to load ApplicationContext")
+    @Test
+    public void insertMonitoringTest() throws Exception {
+        // Given
+        String path = "/insert/monitoring";
+
+        // When
+        ResultActions resultActions = mockMvc.perform(MockMvcRequestBuilders.post(path));
+
+        // Then
+        //resultActions.andExpect(MockMvcResultMatchers.status().isOk());
+        //resultActions.andExpect(MockMvcResultMatchers.content().string("Welcome to the VRAC tool center"));
+    }
 
     @Disabled
     @Test
-    public void getFindAllStrategiesTest() throws Exception {
+    public void getFindAllMonitoringsTest() throws Exception {
         // Given
-        String path = "/find/allStrategies";
+        String path = "/find/allMonitorings";
 
         // When
         ResultActions resultActions = mockMvc.perform(MockMvcRequestBuilders.get(path));
@@ -34,5 +47,8 @@ public class StrategyControllerTest {
         //resultActions.andExpect(MockMvcResultMatchers.status().isOk());
         //resultActions.andExpect(MockMvcResultMatchers.content().string("Welcome to the VRAC tool center"));
     }
+
+
+
 
 }

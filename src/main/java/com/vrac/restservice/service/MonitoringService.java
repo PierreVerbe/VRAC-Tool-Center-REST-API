@@ -39,7 +39,7 @@ public class MonitoringService {
         return insertedMonitoring;
     }
 
-    public List<Monitoring> findAllMonitoring() {
+    public List<Monitoring> findAllMonitorings() {
         return monitoringRepository.findAll();
     }
 
