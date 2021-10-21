@@ -34,4 +34,19 @@ public class SequenceGeneratorServiceTest {
         // Then
         assertEquals(result, 1);
     }
+
+    @Test
+    public void getSequenceNumber() {
+        // Given
+        String sequenceName = "newSequenceName";
+        sequenceGeneratorService.getSequenceNumber(sequenceName);
+        sequenceGeneratorService.getSequenceNumber(sequenceName);
+
+        // When
+        Long result = sequenceGeneratorService.getSequenceNumber(sequenceName);
+
+        // Then
+        assertEquals(result, 3);
+    }
+
 }
