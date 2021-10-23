@@ -2,7 +2,7 @@ package com.vrac.restservice.integration;
 
 import com.vrac.restservice.entity.monitoring.Monitoring;
 import com.vrac.restservice.service.MonitoringService;
-import com.vrac.restservice.util.IntegrationTest;
+import com.vrac.restservice.util.UtilTest;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +20,7 @@ import static com.vrac.restservice.entity.MongoCollection.SEQUENCE;
 
 @SpringBootTest
 @AutoConfigureMockMvc
-public class RestServiceMonitoringTest implements IntegrationTest {
+public class RestServiceMonitoringTest implements UtilTest {
 
     @Autowired
     private MockMvc mockMvc;
@@ -62,7 +62,7 @@ public class RestServiceMonitoringTest implements IntegrationTest {
         monitoring.setName("myName");
         monitoring.setDescription("myDescription");
         monitoring.setVersion("v1.0");
-        String content = IntegrationTest.ObjectToString(monitoring);
+        String content = UtilTest.ObjectToString(monitoring);
 
         // When
         ResultActions resultActions = mockMvc.perform(MockMvcRequestBuilders.post(path).content(content).contentType(MediaType.APPLICATION_JSON));

@@ -29,14 +29,15 @@ public class MonitoringService {
 
     public Monitoring insertMonitoring(Monitoring monitoring) {
         // Generate LocalDateTime
-        LocalDateTime currentTime = LocalDateTime.now();
-        monitoring.setDate(currentTime);
+        if (monitoring.getDate() == null) {
+            LocalDateTime currentTime = LocalDateTime.now();
+            monitoring.setDate(currentTime);
+        }
 
         // Generate Sequence
         monitoring.setId(sequenceGeneratorService.getSequenceNumber(SEQUENCE_NAME));
 
-        Monitoring insertedMonitoring = monitoringRepository.insert(monitoring);
-        return insertedMonitoring;
+        return monitoringRepository.insert(monitoring);
     }
 
     public List<Monitoring> findAllMonitorings() {
