@@ -21,7 +21,6 @@ public class StrategyController {
     @PostMapping(value = "/insert/strategy")
     public String insertStrategy(@RequestBody Strategy strategy) {
         Strategy result = strategyService.insertStrategy(strategy);
-
         return String.format("Strategy id=%d created", result.getId());
     }
 
@@ -32,8 +31,8 @@ public class StrategyController {
     }
 
     @GetMapping(value = "/find/strategy")
-    public Strategy getStrategy(@RequestBody Long id) {
-        return strategyService.findStrategyWithId(id);
+    public Strategy getStrategyById(@RequestBody Strategy strategy) {
+        return strategyService.findStrategyWithId(strategy.getId());
     }
 
     // UPDATE
@@ -44,8 +43,8 @@ public class StrategyController {
 
     // DELETE
     @DeleteMapping("/delete/strategy")
-    public String deleteStrategyById(@RequestBody Long id) {
-        return strategyService.deleteStrategy(id);
+    public String deleteStrategyById(@RequestBody Strategy strategy) {
+        return strategyService.deleteStrategy(strategy.getId());
     }
 
 }

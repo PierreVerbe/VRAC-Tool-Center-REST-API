@@ -20,7 +20,7 @@ import static com.vrac.restservice.entity.MongoCollection.SEQUENCE;
 
 @SpringBootTest
 @AutoConfigureMockMvc
-public class RestServiceMonitoring implements IntegrationTest {
+public class RestServiceMonitoringTest implements IntegrationTest {
 
     @Autowired
     private MockMvc mockMvc;
@@ -74,7 +74,7 @@ public class RestServiceMonitoring implements IntegrationTest {
     }
 
     @Test
-    void getWelcomeTest() throws Exception {
+    void getAllMonitorings() throws Exception {
         // Given
         String path = "/find/allMonitorings";
 
@@ -85,6 +85,50 @@ public class RestServiceMonitoring implements IntegrationTest {
         resultActions
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.content().string("[]"));
+    }
+
+    @Test
+    void getMonitoringById() throws Exception {
+        // Given
+        String path = "/find/monitoring";
+        String content = "{\"id\":1}";
+
+        // When
+        ResultActions resultActions = mockMvc.perform(MockMvcRequestBuilders.get(path).content(content).contentType(MediaType.APPLICATION_JSON));
+
+        // Then
+        resultActions.andExpect(MockMvcResultMatchers.status().isNotFound());
+    }
+
+    @Test
+    void updateMonitoring() throws Exception {
+        // Given
+        String path = "/update/monitoring";
+        String content = "{\"id\":1," +
+                "\"name\":\"myName\"," +
+                "\"date\":null," +
+                "\"description\":\"myDescription\"," +
+                "\"monitoring\":null," +
+                "\"version\":\"v1.1\"}";
+
+        // When
+        ResultActions resultActions = mockMvc.perform(MockMvcRequestBuilders.put(path).content(content).contentType(MediaType.APPLICATION_JSON));
+
+        // Then
+        resultActions.andExpect(MockMvcResultMatchers.status().isNotFound());
+    }
+
+    @Test
+    void deleteMonitoringById() throws Exception {
+        // Given
+        String path = "/delete/monitoring";
+        String content = "{\"id\":1}";
+
+        // When
+        ResultActions resultActions = mockMvc.perform(MockMvcRequestBuilders.delete(path).content(content).contentType(MediaType.APPLICATION_JSON));
+
+        // Then
+        resultActions.andExpect(MockMvcResultMatchers.status().isNotFound());
     }
 
 }

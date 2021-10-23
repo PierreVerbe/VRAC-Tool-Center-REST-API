@@ -1,7 +1,6 @@
 package com.vrac.restservice.controller.monitoring;
 
 import com.vrac.restservice.entity.monitoring.Monitoring;
-import com.vrac.restservice.entity.strategy.Strategy;
 import com.vrac.restservice.repository.MonitoringRepository;
 import com.vrac.restservice.service.MonitoringService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,21 +19,20 @@ public class MonitoringController {
 
     // CREATE
     @PostMapping(value = "/insert/monitoring")
-    public String insertStrategy(@RequestBody Monitoring monitoring) {
+    public String insertMonitoring(@RequestBody Monitoring monitoring) {
         Monitoring result = monitoringService.insertMonitoring(monitoring);
-
         return String.format("Monitoring id=%d created", result.getId());
     }
 
     // READ
     @GetMapping(value = "/find/allMonitorings")
-    public List<Monitoring> getAllStrategies() {
+    public List<Monitoring> getAllMonitorings() {
         return monitoringService.findAllMonitorings();
     }
 
     @GetMapping(value = "/find/monitoring")
-    public Monitoring getMonitoring(@RequestBody Long id) {
-        return monitoringService.findMonitoringWithId(id);
+    public Monitoring getMonitoringById(@RequestBody Monitoring monitoring) {
+        return monitoringService.findMonitoringWithId(monitoring.getId());
     }
 
     // UPDATE
@@ -45,8 +43,8 @@ public class MonitoringController {
 
     // DELETE
     @DeleteMapping("/delete/monitoring")
-    public String deleteStrategyById(@RequestBody Long id) {
-        return monitoringService.deleteMonitoring(id);
+    public String deleteMonitoringById(@RequestBody Monitoring monitoring) {
+        return monitoringService.deleteMonitoring(monitoring.getId());
     }
 
 }
