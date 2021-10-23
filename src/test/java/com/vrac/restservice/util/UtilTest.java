@@ -13,7 +13,6 @@ public interface UtilTest {
             mapper.setDateFormat(simpleDateFormat);
 
             return mapper.writeValueAsString(object);
-
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
