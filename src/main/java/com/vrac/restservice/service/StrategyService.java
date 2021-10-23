@@ -29,14 +29,15 @@ public class StrategyService {
 
     public Strategy insertStrategy(Strategy strategy) {
         // Generate LocalDateTime
-        LocalDateTime currentTime = LocalDateTime.now();
-        strategy.setDate(currentTime);
+        if (strategy.getDate() == null) {
+            LocalDateTime currentTime = LocalDateTime.now();
+            strategy.setDate(currentTime);
+        }
 
         // Generate Sequence
         strategy.setId(sequenceGeneratorService.getSequenceNumber(SEQUENCE_NAME));
 
-        Strategy insertedStrategy = strategyRepository.insert(strategy);
-        return insertedStrategy;
+        return strategyRepository.insert(strategy);
     }
 
     public List<Strategy> findAllStrategies() {
