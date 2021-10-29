@@ -36,13 +36,13 @@ public class StrategyController {
     }
 
     // UPDATE
-    @PutMapping("/update/strategy")
+    @PutMapping(value = "/update/strategy")
     public String updateStrategy(@RequestBody Strategy strategyToUpdate) {
         return strategyService.updateStrategy(strategyToUpdate);
     }
 
     // DELETE
-    @DeleteMapping("/delete/strategy")
+    @DeleteMapping(value = "/delete/strategy")
     public String deleteStrategyById(@RequestBody Strategy strategy) {
         return strategyService.deleteStrategy(strategy.getId());
     }

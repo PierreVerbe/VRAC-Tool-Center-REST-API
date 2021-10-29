@@ -36,13 +36,13 @@ public class MonitoringController {
     }
 
     // UPDATE
-    @PutMapping("/update/monitoring")
+    @PutMapping(value = "/update/monitoring")
     public String updateMonitoring(@RequestBody Monitoring monitoringToUpdate) {
         return monitoringService.updateMonitoring(monitoringToUpdate);
     }
 
     // DELETE
-    @DeleteMapping("/delete/monitoring")
+    @DeleteMapping(value = "/delete/monitoring")
     public String deleteMonitoringById(@RequestBody Monitoring monitoring) {
         return monitoringService.deleteMonitoring(monitoring.getId());
     }

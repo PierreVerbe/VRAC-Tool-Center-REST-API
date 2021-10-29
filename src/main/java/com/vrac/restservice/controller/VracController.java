@@ -12,12 +12,12 @@ public class VracController {
     @Autowired
     private VracService vracService;
 
-    @GetMapping("/welcome")
+    @GetMapping(value = "/welcome")
     public String welcome() {
         return "Welcome to the VRAC tool center";
     }
 
-    @GetMapping("/random/{min}/{max}")
+    @GetMapping(value = "/random/{min}/{max}")
     public String generateRandomInt(@PathVariable int min, @PathVariable int max) {
         int randomNumber = vracService.generateInt(min, max);
         return String.format("[%d, %d] => %d", min, max, randomNumber);
