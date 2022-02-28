@@ -2,17 +2,19 @@ package com.vrac.restservice.unitary.service;
 
 import com.vrac.restservice.entity.monitoring.Monitoring;
 import com.vrac.restservice.error.exception.ResourceNotFoundException;
+import com.vrac.restservice.repository.MonitoringRepository;
 import com.vrac.restservice.service.MonitoringService;
-import org.junit.jupiter.api.BeforeEach;
+import com.vrac.restservice.service.SequenceGeneratorService;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.boot.test.mock.mockito.MockBean;
 
+import java.util.ArrayList;
 import java.util.List;
 
-import static com.vrac.restservice.entity.MongoCollection.MONITORING;
-import static com.vrac.restservice.entity.MongoCollection.SEQUENCE;
+import static com.vrac.restservice.entity.monitoring.Monitoring.SEQUENCE_NAME;
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
@@ -21,11 +23,11 @@ public class MonitoringServiceTest {
     @Autowired
     private MonitoringService monitoringService;
 
-    @BeforeEach
-    void beforeEach() {
-        monitoringService.getMongoOperations().remove(new Query(), SEQUENCE);
-        monitoringService.getMongoOperations().remove(new Query(), MONITORING);
-    }
+    @MockBean
+    private SequenceGeneratorService sequenceGeneratorService;
+
+    @MockBean
+    private MonitoringRepository monitoringRepository;
 
     @Test
     public void insertMonitoringTest() {
@@ -36,6 +38,9 @@ public class MonitoringServiceTest {
         monitoring.setVersion("v1.0");
 
         // When
+        Mockito.when(sequenceGeneratorService.getSequenceNumber(SEQUENCE_NAME)).thenReturn(1L);
+        Mockito.when(monitoringRepository.insert(monitoring)).thenReturn(monitoring);
+
         Monitoring result = monitoringService.insertMonitoring(monitoring);
 
         // Then
@@ -49,15 +54,20 @@ public class MonitoringServiceTest {
     @Test
     public void findAllMonitoringsTest() {
         // Given
+        List<Monitoring> list = new ArrayList<>();
         for (int i = 1; i <= 3; i++) {
             Monitoring monitoring = new Monitoring();
+            monitoring.setId((long) i);
             monitoring.setName("myName" + i);
             monitoring.setDescription("myDescription" + i);
             monitoring.setVersion("v1.0");
-            monitoringService.insertMonitoring(monitoring);
+            list.add(monitoring);
         }
 
+        System.out.println(list);
+
         // When
+        Mockito.when(monitoringRepository.findAll()).thenReturn(list);
         List<Monitoring> result = monitoringService.findAllMonitorings();
 
         // Then
@@ -76,6 +86,7 @@ public class MonitoringServiceTest {
         // Given
 
         // When
+        Mockito.when(monitoringRepository.findAll()).thenReturn(new ArrayList<>());
         List<Monitoring> result = monitoringService.findAllMonitorings();
 
         // Then
@@ -87,12 +98,13 @@ public class MonitoringServiceTest {
         // Given
         Long id = 1L;
         Monitoring monitoring = new Monitoring();
+        monitoring.setId(id);
         monitoring.setName("myName");
         monitoring.setDescription("myDescription");
         monitoring.setVersion("v1.0");
 
         // When
-        monitoringService.insertMonitoring(monitoring);
+        Mockito.when(monitoringRepository.findById(id)).thenReturn(java.util.Optional.of(monitoring));
         Monitoring result = monitoringService.findMonitoringWithId(id);
 
         // Then
@@ -118,16 +130,22 @@ public class MonitoringServiceTest {
     @Test
     public void updateExitingMonitoringTest() {
         // Given
+        Long id = 1L;
         Monitoring monitoring = new Monitoring();
+        monitoring.setId(id);
         monitoring.setName("myName");
         monitoring.setDescription("myDescription");
         monitoring.setVersion("v1.0");
-        monitoringService.insertMonitoring(monitoring);
+
+        Monitoring updatedMonitoring = new Monitoring();
+        updatedMonitoring.setId(id);
+        updatedMonitoring.setName("myNameUpdated");
+        updatedMonitoring.setDescription("myDescriptionUpdated");
+        updatedMonitoring.setVersion("v1.1");
 
         // When
-        monitoring.setName("myNameUpdated");
-        monitoring.setDescription("myDescriptionUpdated");
-        monitoring.setVersion("v1.1");
+        Mockito.when(monitoringRepository.findById(id)).thenReturn(java.util.Optional.of(monitoring));
+        Mockito.when(monitoringRepository.insert(updatedMonitoring)).thenReturn(updatedMonitoring);
         String result = monitoringService.updateMonitoring(monitoring);
 
         // Then
@@ -152,12 +170,14 @@ public class MonitoringServiceTest {
         // Given
         Long id = 1L;
         Monitoring monitoring = new Monitoring();
+        monitoring.setId(id);
         monitoring.setName("myName");
         monitoring.setDescription("myDescription");
         monitoring.setVersion("v1.0");
         monitoringService.insertMonitoring(monitoring);
 
         // When
+        Mockito.when(monitoringRepository.findById(id)).thenReturn(java.util.Optional.of(monitoring));
         String result = monitoringService.deleteMonitoring(id);
 
         // Then
