@@ -1,6 +1,6 @@
 package com.vrac.restservice.service;
 
-import com.vrac.restservice.entity.strategy.Strategy;
+import com.vrac.restservice.entity.strategy.GlobalStrategy;
 import com.vrac.restservice.error.exception.ResourceNotFoundException;
 import com.vrac.restservice.repository.StrategyRepository;
 import lombok.Data;
@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
-import static com.vrac.restservice.entity.strategy.Strategy.SEQUENCE_NAME;
+import static com.vrac.restservice.entity.strategy.GlobalStrategy.SEQUENCE_NAME;
 
 @Data
 @Service
@@ -27,50 +27,47 @@ public class StrategyService {
     @Autowired
     private MongoOperations mongoOperations;
 
-    public Strategy insertStrategy(Strategy strategy) {
+    public GlobalStrategy insertStrategy(GlobalStrategy globalStrategy) {
         // Generate LocalDateTime
-        if (strategy.getDate() == null) {
+        if (globalStrategy.getDate() == null) {
             LocalDateTime currentTime = LocalDateTime.now();
-            strategy.setDate(currentTime);
+            globalStrategy.setDate(currentTime);
         }
 
         // Generate Sequence
-        strategy.setId(sequenceGeneratorService.getSequenceNumber(SEQUENCE_NAME));
+        globalStrategy.setId(sequenceGeneratorService.getSequenceNumber(SEQUENCE_NAME));
 
-        return strategyRepository.insert(strategy);
+        return strategyRepository.insert(globalStrategy);
     }
 
-    public List<Strategy> findAllStrategies() {
+    public List<GlobalStrategy> findAllStrategies() {
         return strategyRepository.findAll();
     }
 
-    public Strategy findStrategyWithId(Long id) {
-        Optional<Strategy> strategy = strategyRepository.findById(id);
+    public GlobalStrategy findStrategyWithId(Long id) {
+        Optional<GlobalStrategy> strategy = strategyRepository.findById(id);
         return strategy.orElseThrow(() -> new ResourceNotFoundException("Strategy not found with id=" + id));
     }
 
-    public String updateStrategy(Strategy strategyToUpdate) {
-        Long id = strategyToUpdate.getId();
-        Strategy strategy = strategyRepository
+    public String updateStrategy(GlobalStrategy globalStrategyToUpdate) {
+        Long id = globalStrategyToUpdate.getId();
+        GlobalStrategy globalStrategy = strategyRepository
                 .findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Strategy not found with id=" + id));
 
         // Generate LocalDateTime
         LocalDateTime currentTime = LocalDateTime.now();
+        globalStrategy.setDate(currentTime);
+        globalStrategy.setStrategy(globalStrategyToUpdate.getStrategy());
+        globalStrategy.setMetaActions(globalStrategyToUpdate.getMetaActions());
 
-        strategy.setName(strategyToUpdate.getName());
-        strategy.setDate(currentTime);
-        strategy.setDescription(strategyToUpdate.getDescription());
-        strategy.setSender(strategyToUpdate.getSender());
-        strategy.setStrategy(strategyToUpdate.getStrategy());
-        strategy.setVersion(strategyToUpdate.getVersion());
         strategyRepository.deleteById(id);
-        strategyRepository.insert(strategy);
+        strategyRepository.insert(globalStrategy);
         return String.format("Strategy id=%d updated", id);
     }
 
     public String deleteStrategy(Long id) {
-        Strategy strategy = strategyRepository
+        GlobalStrategy globalStrategy = strategyRepository
                 .findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Strategy not found with id=" + id));
 

@@ -1,6 +1,6 @@
 package com.vrac.restservice.integration;
 
-import com.vrac.restservice.entity.strategy.Strategy;
+import com.vrac.restservice.entity.strategy.GlobalStrategy;
 import com.vrac.restservice.service.StrategyService;
 import com.vrac.restservice.util.UtilTest;
 import org.junit.jupiter.api.BeforeEach;
@@ -20,7 +20,7 @@ import static com.vrac.restservice.entity.MongoCollection.STRATEGY;
 
 @SpringBootTest
 @AutoConfigureMockMvc
-public class RestServiceStrategyTest implements UtilTest {
+public class RestServiceGlobalStrategyTest implements UtilTest {
 
     @Autowired
     private MockMvc mockMvc;
@@ -58,11 +58,9 @@ public class RestServiceStrategyTest implements UtilTest {
     void insertStrategyWithMapper() throws Exception {
         // Given
         String path = "/insert/strategy";
-        Strategy strategy = new Strategy();
-        strategy.setName("myName");
-        strategy.setDescription("myDescription");
-        strategy.setVersion("v1.0");
-        String content = UtilTest.ObjectToString(strategy);
+        GlobalStrategy globalStrategy = new GlobalStrategy();
+        //globalStrategy.setName("myName");
+        String content = UtilTest.ObjectToString(globalStrategy);
 
         // When
         ResultActions resultActions = mockMvc.perform(MockMvcRequestBuilders.post(path).content(content).contentType(MediaType.APPLICATION_JSON));
