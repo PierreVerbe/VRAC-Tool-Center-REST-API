@@ -6,6 +6,7 @@ import com.vrac.restservice.entity.strategy.metaAction.action.parameters.*;
 
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "action")
 @JsonSubTypes({
+        @JsonSubTypes.Type(value = ActivateBackGripperAutoGrabParameters.class, name = "ActivateBackGripperAutoGrab"),
         @JsonSubTypes.Type(value = BackGrippersDropCenterParameters.class, name = "BackGrippersDropCenter"),
         @JsonSubTypes.Type(value = BackGrippersDropLeftParameters.class, name = "BackGrippersDropLeft"),
         @JsonSubTypes.Type(value = BackGrippersDropRightParameters.class, name = "BackGrippersDropRight"),
@@ -24,6 +25,8 @@ import com.vrac.restservice.entity.strategy.metaAction.action.parameters.*;
         @JsonSubTypes.Type(value = HomingParameters.class, name = "Homing"),
         @JsonSubTypes.Type(value = LineParameters.class, name = "Line"),
         @JsonSubTypes.Type(value = RotateParameters.class, name = "Rotate"),
+        @JsonSubTypes.Type(value = SetDetectionRangeParameters.class, name = "SetDetectionRange"),
+        @JsonSubTypes.Type(value = SetOdometryParameters.class, name = "SetOdometry"),
         @JsonSubTypes.Type(value = TopArmGalleryBottomParameters.class, name = "TopArmGalleryBottom"),
         @JsonSubTypes.Type(value = TopArmGalleryTopParameters.class, name = "TopArmGalleryTop"),
         @JsonSubTypes.Type(value = TopArmGetSamplesParameters.class, name = "TopArmGetSamples"),
